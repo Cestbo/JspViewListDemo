@@ -30,10 +30,10 @@
              <div>
                 <dl>
                    <dt> 
-                       <a href="details.jsp"><img src="image/<%=item.getPicture()%>" width="120" height="120"></a>
+                       <a href="details.jsp?id=<%=item.getNo()%>"><img src="image/<%=item.getPicture()%>" width="120" height="120"></a>
                    </dt>
                    <dd class="dd_name" style="color: blue;"><%=item.getName() %></dd>
-                   <dd class="dd_city">產地：<%=item.getCity() %>&nbsp;&nbsp;價格：￥<%=item.getPrice() %></dd>
+                   <dd class="dd_city">產地：<%=item.getCity() %><br>價格：￥<%=item.getPrice() %></dd>
                 </dl>
              </div>
              </td>
