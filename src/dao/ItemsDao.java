@@ -1,13 +1,12 @@
 package dao;
 
-import java.awt.List;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.eclipse.jdt.internal.compiler.batch.Main;
 
 import entity.Items;
 import util.DBhelp;

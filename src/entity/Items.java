@@ -2,13 +2,23 @@ package entity;
 
 public class Items {
 
-	private int no;//ÉÌÆ·¾ŽÌ–
+	private int no;//ï¿½ï¿½Æ·ï¿½ï¿½Ì–
 	private String name;
 	private int price;
-	private int number;//Žì´æ
-	private String city;//ËùÔÚµØ
+	private int number;//ï¿½ï¿½ï¿½
+	private String city;//ï¿½ï¿½ï¿½Úµï¿½
 	private String picture;
-
+    
+	public Items() {
+		// TODO Auto-generated constructor stub
+	    no=0;
+	    name=null;
+	    price=0;
+	    number=0;
+	    city=null;
+	    picture=null;
+	}
+	
 	public int getNo() {
 		return no;
 	}
@@ -57,4 +67,36 @@ public class Items {
 		this.picture = picture;
 	}
 
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return no+name.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		if(this==obj)
+		{
+			return true;
+		}
+		if(obj instanceof Items)
+		{
+			Items items=(Items)obj;
+			if(no==items.getNo()&&name.equals(items.getName()))
+			{
+				return true;
+			}
+		}
+		
+		return false;
+		
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		
+		return name+","+price+",";
+	}
 }

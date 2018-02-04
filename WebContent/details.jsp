@@ -7,6 +7,56 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="jquery.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function()
+    		{
+    	       var t=$("#number");
+    	       var total=$("#store").text();
+    	       $("#inc").click(function(){       
+    	           t.val(parseInt(t.val())+1)
+    	           setTotal();
+    	       })
+    	       $("#dec").click(function(){
+    	           t.val(parseInt(t.val())-1)
+    	           setTotal();
+    	       })
+    	       
+    	       $("#cart").click(function() {
+    	    	   var tt = $("#number").val();
+    	    	   if(tt>parseInt(total))
+	        	   {
+	        	   alert('库存量不足！');
+	        	   }
+    	    	   else
+    	    	 {
+    	    		   alert('添加成功');
+    	    		   
+    	   	     }
+			})
+    	       
+    	         function setTotal(){
+    	          var tt = $("#number").val();
+    	          
+    	           if(tt<=0){
+    	           alert('输入的值错误！');
+    	           t.val(parseInt(t.val())+1)
+    	           }
+    	           if(tt>parseInt(total))
+    	        	   {
+    	        	   alert('输入的值错误！');
+        	           t.val(parseInt(t.val())-1)
+    	        	   }
+    	       }
+    	       
+    		})
+</script>
+ <style type="text/css">
+    #number {
+       width:30px;
+    }
+ </style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -32,9 +82,22 @@
                    </dt>
                    <dd class="dd_name" style="color: blue;"><%=item.getName() %></dd>
                    <dd class="dd_city">產地：<%=item.getCity() %>&nbsp;&nbsp;價格：￥<%=item.getPrice() %></dd>
-                   <dd>库存量：<%=item.getNumber() %></dd>
+                   <dd>库存量：<span id="store"><%=item.getNumber() %></span></dd>
+                   
                 </dl>
              </div>
+                                          购买数量<span>
+                        <input type="button" value="-" id="dec">
+                        <input type="text" value="1" id="number" >
+                        <input type="button" value="+" id="inc">
+                   </span>
+              <br/>
+              <br>
+             <span>
+                <button type="button" >立即购买</button>
+                <button type="button" id="cart">加入购物车</button>
+                <button type="button" >查看购物车</button>
+             </span>
              </td>
            <%
               }
@@ -91,6 +154,7 @@
            </td>
           
        </tr>
+      
     </table>
     </center>
 </body>
