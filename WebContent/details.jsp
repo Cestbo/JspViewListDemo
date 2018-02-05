@@ -9,7 +9,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="jquery.js"></script>
 <script type="text/javascript">
-
+<%
+   String path=request.getContextPath();
+%>
+function addtoCart(no) {
+	   
+	   var tt = $("#number").val();
+	   var total=$("#store").text();
+	   if(tt>parseInt(total))
+	   {
+	   alert('库存量不足！');
+	   }
+	   else
+	 {
+		   alert('添加成功');
+		   location.href="<%=path%>/CartServlet?no="+no+"&number="+tt+"&action=add";
+     }
+}
     $(document).ready(function()
     		{
     	       var t=$("#number");
@@ -23,18 +39,7 @@
     	           setTotal();
     	       })
     	       
-    	       $("#cart").click(function() {
-    	    	   var tt = $("#number").val();
-    	    	   if(tt>parseInt(total))
-	        	   {
-	        	   alert('库存量不足！');
-	        	   }
-    	    	   else
-    	    	 {
-    	    		   alert('添加成功');
-    	    		   
-    	   	     }
-			})
+    	      
     	       
     	         function setTotal(){
     	          var tt = $("#number").val();
@@ -69,7 +74,8 @@
          
           <%
               ItemsDao dao=new ItemsDao();
-              Items item=dao.getItembyNO(Integer.valueOf(request.getParameter("id")));
+              String no=request.getParameter("id");
+              Items item=dao.getItembyNO(Integer.valueOf(no));
               if(item!=null)
               {
           %> 
@@ -95,8 +101,8 @@
               <br>
              <span>
                 <button type="button" >立即购买</button>
-                <button type="button" id="cart">加入购物车</button>
-                <button type="button" >查看购物车</button>
+                <button type="button" id="cart" onclick="addtoCart(<%=no%>)">加入购物车</button>
+                <a href="<%=path %>/CartServlet?action=show"><button type="button" >查看购物车</button></a>
              </span>
              </td>
            <%
