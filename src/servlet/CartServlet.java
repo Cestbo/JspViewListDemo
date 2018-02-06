@@ -36,7 +36,9 @@ public class CartServlet extends HttpServlet {
 		if(action.equals("add"))
 		{
 			addtoCart(request, response);
-			response.sendRedirect(request.getHeader("Referer"));
+			String no=request.getParameter("no");
+			request.getRequestDispatcher("details.jsp?id="+no+"&flag=cart").forward(request, response);
+			//response.sendRedirect(request.getHeader("Referer"));
 		}
 		if(action.equals("show"))
 		{

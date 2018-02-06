@@ -53,6 +53,7 @@ public class ItemsDao {
 					e.printStackTrace();
 				}
 			}
+			
 		}
 
 		return items;

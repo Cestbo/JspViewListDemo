@@ -116,7 +116,12 @@ function addtoCart(no) {
                <%
                    String list="";
                    //逆序添加记录
+                   String flag=request.getParameter("flag");
+                   
+                   if(flag==null || (flag!=null && !flag.equals("cart")))
+                   {
                    list=request.getParameter("id")+","+list;
+                   }
                    Cookie[] cookies=request.getCookies();
                    if(cookies!=null && cookies.length>0)
                    {

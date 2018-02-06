@@ -14,6 +14,10 @@
 		window.event.returnValue=false;
 }
 </script>
+<style type="text/css">
+   #shopping table {border-top: 10px solid yellow}
+   #shopping table td{border-top: 1px solid yellow}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -27,13 +31,13 @@
    <hr>
    <div id="shopping">
       <center>
-         <table border="0" cellpadding="0" cellspacing="50" >
+         <table style="border-collapse: separate;border-spacing: 60px 10px;">
          <%
          	if (request.getSession().getAttribute("cart") != null)
          	{
          		Cart cart = (Cart) request.getSession().getAttribute("cart");
          %>
-            <tr>
+            <tr id="head" >
                <th>商品名称</th>
                <th>商品单价</th>
                <th>商品总价</th>
@@ -50,7 +54,7 @@
         		    Items item=obj.getKey();
         		    int num=obj.getValue();
             %>
-            <tr>
+            <tr class="item" style="border-top: 2px solid yellow">
                <td>
                  <a href="details.jsp?id=<%=item.getNo()%>">
                  <img  src="image/<%=item.getPicture()%>" width="100" height="80">
@@ -74,7 +78,8 @@
                <td></td>
                <td></td>
                <td></td>
-               <td>总价：￥<%=cart.getTotalPrice() %>元</td>
+               <td style="background-color: yellow;"><br>总价：￥<%=cart.getTotalPrice() %>元</td>
+               <td></td>
             </tr>
             <%} %>
             <!-- 循环部分 -->
