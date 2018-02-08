@@ -14,10 +14,12 @@
 		window.event.returnValue=false;
 }
 </script>
-<style type="text/css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<!-- <style type="text/css">
    #shopping table {border-top: 10px solid yellow}
    #shopping table td{border-top: 1px solid yellow}
 </style>
+ -->
 <title>Insert title here</title>
 </head>
 <body>
@@ -27,22 +29,25 @@
    <!--商品名称：
    &nbsp;&nbsp;商品数量：  -->
    <h1>我的购物车</h1>
-   <a href="index.jsp">首页</a>>><a>商品列表</a>
    <hr>
+   <a href="index.jsp"><big>首页</big></a><big>>>商品列表</big>
+   
    <div id="shopping">
       <center>
-         <table style="border-collapse: separate;border-spacing: 60px 10px;">
+         <table 
+         
+           class=" table table-striped  table-hover" > 
          <%
          	if (request.getSession().getAttribute("cart") != null)
          	{
          		Cart cart = (Cart) request.getSession().getAttribute("cart");
          %>
             <tr id="head" >
-               <th>商品名称</th>
-               <th>商品单价</th>
-               <th>商品总价</th>
-               <th>购买数量</th>
-               <th>操作</th>
+               <th style="text-align: center;">商品名称</th>
+               <th style="text-align: center;">商品单价</th>
+               <th style="text-align: center;">商品总价</th>
+               <th style="text-align: center;">购买数量</th>
+               <th style="text-align: center;">操作</th>
             </tr>
             <!-- 循环部分 -->
             <%
@@ -54,18 +59,19 @@
         		    Items item=obj.getKey();
         		    int num=obj.getValue();
             %>
-            <tr class="item" style="border-top: 2px solid yellow">
-               <td>
+            <tr class="item" >
+               <td align="center">
                  <a href="details.jsp?id=<%=item.getNo()%>">
-                 <img  src="image/<%=item.getPicture()%>" width="100" height="80">
+                 <img  src="image/<%=item.getPicture()%>" width="120" height="100">
                  </a>
-                 <br>
-                 <%=item.getName() %>
+                 &nbsp;&nbsp;&nbsp;&nbsp;
+                 <strong><%=item.getName()%></strong>
                </td>
-               <td>￥<%=item.getPrice() %>元</td>
-               <td>￥<%=item.getPrice()*num %>元</td>
-               <td align="center"><%=num %></td>
-               <td>
+               <td align="center"><br><br>￥<%=item.getPrice() %>元</td>
+               <td align="center"><br><br>￥<%=item.getPrice()*num %>元</td>
+               <td align="center"><br><br><%=num %></td>
+               <td align="center">
+               <br><br>
                   <a href="<%=request.getContextPath()%>/CartServlet?action=delete&no=<%=item.getNo() %>"
                   onclick="delcfm()"><span style="background-color: gray;color: blue;">删除</span></a>
                </td>
@@ -78,7 +84,7 @@
                <td></td>
                <td></td>
                <td></td>
-               <td style="background-color: yellow;"><br>总价：￥<%=cart.getTotalPrice() %>元</td>
+               <td align="center" style="background-color: gray;color: red;font-size: large;"><strong>总价：￥<%=cart.getTotalPrice() %>元</strong></td>
                <td></td>
             </tr>
             <%} %>
