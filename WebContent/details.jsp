@@ -104,6 +104,17 @@ function addtoCart(no) {
                 <button type="button" id="cart" onclick="addtoCart(<%=no%>)">加入购物车</button>
                 <a href="<%=path %>/CartServlet?action=show"><button type="button" >查看购物车</button></a>
              </span>
+             <br>
+             <br>
+             <hr>
+             <div>
+                 <p>&nbsp;
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品是人类社会生产力发展到一定历史阶段的产物，
+                   是用于交换的劳动产品。
+                   恩格斯对此进行了科学的总结：商品“首先是私人产品。但是，只有这些私人产品不是为自己消费，
+                   而是为他人的消费，即为社会的消费而生产时，它们才成为商品；它们通过交换进入社会的消费”。
+                 </p>
+             </div>
              </td>
            <%
               }
