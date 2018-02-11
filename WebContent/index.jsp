@@ -10,22 +10,44 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+    Users user=(Users)request.getSession().getAttribute("user");
+%>
     <h1>商品展示</h1>
+    <%
+        if(user==null)
+        {
+    %>
+    <p align="right">您好，欢迎来到淘淘网！&nbsp;&nbsp; [<a href="login.jsp" >登录</a>]&nbsp;[<a href="register.jsp">免费注册</a>]<p>
+    <%
+        }
+        else{
+    %>
+    <p align="right">亲爱的&nbsp;<mark><%=user.getUsername() %></mark>&nbsp;您好，欢迎来到淘淘网！</p>
+    <%
+        }
+    %>
     <hr>
     
     <center>
-    <table width="750" height="120" cellpadding="0" cellspacing="0" border="0">
-       <tr>
-         
-          <%
-              ItemsDao dao=new ItemsDao();
-              ArrayList<Items> list=dao.getAllitems();
-              if(list!=null && list.size()>0)
-              {
-                 for(Items item:list)
-                   {
+    <table width="750" height="120" cellpadding="0" cellspacing="0" border="0" >
+      <% 
+        ItemsDao dao=new ItemsDao();
+        ArrayList<Items> list=dao.getAllitems();
+        int size=list.size();
+        int count=0;
+        for(int i=0;i<(size/4)+1;i++)
+        {
+      %>
+      <tr>
+          <% 
+             for(int j=0;j<4;j++)
+             {
+            	 if((4*i+j)<size)
+            	 {
+            	    Items item=list.get(4*i+j); 
              
-          %> 
+          %>
            <td>
              <div>
                 <dl>
@@ -33,16 +55,18 @@
                        <a href="details.jsp?id=<%=item.getNo()%>"><img src="image/<%=item.getPicture()%>" width="120" height="120"></a>
                    </dt>
                    <dd class="dd_name" style="color: blue;"><%=item.getName() %></dd>
-                   <dd class="dd_city">產地：<%=item.getCity() %><br>價格：￥<%=item.getPrice() %></dd>
+                   <dt class="dd_city">產地：<%=item.getCity() %><br>價格：￥<%=item.getPrice() %></dt>
                 </dl>
              </div>
-             </td>
+            </td>
            <%
-                 }
-              }
+            	 }
+             }
            %>
-          
-       </tr>
+      </tr> 
+      <%
+        }
+      %>
     </table>
     </center>
 </body>

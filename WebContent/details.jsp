@@ -11,6 +11,10 @@
 <script type="text/javascript">
 <%
    String path=request.getContextPath();
+   String flag=request.getParameter("flag");
+   Users user=(Users)request.getSession().getAttribute("user");
+   int f=0;
+   if(user!=null) f=1;
 %>
 function addtoCart(no) {
 	   
@@ -18,16 +22,23 @@ function addtoCart(no) {
 	   var total=$("#store").text();
 	   if(tt>parseInt(total))
 	   {
-	   alert('库存量不足！');
+	      alert('库存量不足！');
 	   }
 	   else
 	 {
-		   alert('添加成功');
+		   var f=<%=f%>;
+	       if(f==1)
+	    	   {
+	    	      alert("添加成功");
+	    	   }
 		   location.href="<%=path%>/CartServlet?no="+no+"&number="+tt+"&action=add";
-     }
+          
+	 }
 }
     $(document).ready(function()
     		{
+    	
+    		   
     	       var t=$("#number");
     	       var total=$("#store").text();
     	       $("#inc").click(function(){       
@@ -127,7 +138,7 @@ function addtoCart(no) {
                <%
                    String list="";
                    //逆序添加记录
-                   String flag=request.getParameter("flag");
+                   
                    
                    if(flag==null || (flag!=null && !flag.equals("cart")))
                    {
