@@ -1,3 +1,6 @@
+<%@page import="java.net.URLDecoder"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.net.URL"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -6,8 +9,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<script type="text/javascript" src="jquery.js"></script>
+<%
+   String prompt=(String)request.getAttribute("prompt");
+   
+%>
+<script type="text/javascript">
+function info(prompt)
+		{
+	
+		   
+	       if(prompt!='null')
+	         alert(prompt);  
+		}
+</script>
 </head>
-<body>
+<body onload="info('<%=prompt %>')">
 <h1 align="center">用户登录</h1>
 <hr>
 <%
@@ -20,7 +37,9 @@
 	{
 		if(cookies[i].getName().equals("username"))
 		{
+			
 			username=cookies[i].getValue();
+			username=URLDecoder.decode(username, "utf-8");
 		}
 		if(cookies[i].getName().equals("password"))
 		{
@@ -32,7 +51,7 @@
 <center>
 <div   style="border: 1px solid white;
 width: 400px;height: 200px;padding: 10px;background-color: gray;">
-<form name="regForm"  action="<%=request.getContextPath()%>/LoginServlet"  method="post" >
+<form name="regForm"  action="<%=request.getContextPath()%>/LoginServlet?action=login"  method="post" >
 <table  cellspacing="0" cellpadding="0" style="border-spacing: 10px;border-collapse: separate;">
  <tr>
     <th>用户名</th>

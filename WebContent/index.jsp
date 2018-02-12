@@ -23,7 +23,10 @@
         }
         else{
     %>
-    <p align="right">亲爱的&nbsp;<mark><%=user.getUsername() %></mark>&nbsp;您好，欢迎来到淘淘网！</p>
+    <p align="right">亲爱的&nbsp;<mark><%=user.getUsername() %>
+    </mark>&nbsp;您好，欢迎来到淘淘网！&nbsp;&nbsp;&nbsp;
+    [<a href="<%=request.getContextPath()%>/LoginServlet?action=logout">退出</a>] 
+    </p>
     <%
         }
     %>
