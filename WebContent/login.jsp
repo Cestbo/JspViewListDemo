@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>用户登录</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" src="jquery.js"></script>
 <%
@@ -21,11 +21,10 @@ function info(prompt)
 		   
 	       if(prompt!='null')
 	         alert(prompt);  
-		}
 </script>
 </head>
-<body onload="info('<%=prompt %>')">
-<h1 align="center">用户登录</h1>
+<body onload="info('<%=prompt %>')" background="image/background.jpg" >
+<h1 align="center" style="color: white;">用户登录</h1>
 <hr>
 <%
    String username="";
@@ -50,7 +49,7 @@ function info(prompt)
 %>
 <center>
 <div   style="border: 1px solid white;
-width: 400px;height: 200px;padding: 10px;background-color: gray;">
+width: 400px;height: 200px;padding: 10px;background-color: white;">
 <form name="regForm"  action="<%=request.getContextPath()%>/LoginServlet?action=login"  method="post" >
 <table  cellspacing="0" cellpadding="0" style="border-spacing: 10px;border-collapse: separate;">
  <tr>

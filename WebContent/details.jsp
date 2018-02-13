@@ -73,9 +73,9 @@ function addtoCart(no) {
        width:30px;
     }
  </style>
-<title>Insert title here</title>
+<title>商品详情</title>
 </head>
-<body>
+<body background="image/background.jpg" style="color: white;">
     <h1>商品详情</h1>
    
      <hr>

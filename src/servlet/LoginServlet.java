@@ -67,6 +67,21 @@ public class LoginServlet extends HttpServlet {
 			request.getSession().removeAttribute("user");
 			response.sendRedirect("index.jsp");
 		}
+		
+		if(action.equals("register"))
+		{
+			UsersDao dao1=new UsersDao();
+			String username1 = request.getParameter("username");
+			String password1 = request.getParameter("password");
+			String surepwd=request.getParameter("surepwd");
+			String email=request.getParameter("email");
+			java.sql.Timestamp timestamp=new java.sql.Timestamp(System.currentTimeMillis());
+			Users user=new Users(0, username1, password1, email, timestamp);
+			dao1.addUser(user);
+			request.getSession().setAttribute("user", user);
+			request.getRequestDispatcher("index.jsp")
+			.forward(request, response);
+		}
 	}
 
 	/**

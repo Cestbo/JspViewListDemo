@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>淘淘网首页</title>
 </head>
-<body>
+<body background="image/background.jpg" style="color: white;">
 <%
     Users user=(Users)request.getSession().getAttribute("user");
 %>
@@ -18,14 +18,14 @@
         if(user==null)
         {
     %>
-    <p align="right">您好，欢迎来到淘淘网！&nbsp;&nbsp; [<a href="login.jsp" >登录</a>]&nbsp;[<a href="register.jsp">免费注册</a>]<p>
+    <p align="right">您好，欢迎来到淘淘网！&nbsp;&nbsp; [<a href="login.jsp" style="color: white;">登录</a>]&nbsp;[<a href="register.jsp" style="color:white;">免费注册</a>]<p>
     <%
         }
         else{
     %>
     <p align="right">亲爱的&nbsp;<mark><%=user.getUsername() %>
     </mark>&nbsp;您好，欢迎来到淘淘网！&nbsp;&nbsp;&nbsp;
-    [<a href="<%=request.getContextPath()%>/LoginServlet?action=logout">退出</a>] 
+    [<a href="<%=request.getContextPath()%>/LoginServlet?action=logout" style="color: white;">退出</a>] 
     </p>
     <%
         }
@@ -57,7 +57,7 @@
                    <dt> 
                        <a href="details.jsp?id=<%=item.getNo()%>"><img src="image/<%=item.getPicture()%>" width="120" height="120"></a>
                    </dt>
-                   <dd class="dd_name" style="color: blue;"><%=item.getName() %></dd>
+                   <dd class="dd_name"><%=item.getName() %></dd>
                    <dt class="dd_city">產地：<%=item.getCity() %><br>價格：￥<%=item.getPrice() %></dt>
                 </dl>
              </div>

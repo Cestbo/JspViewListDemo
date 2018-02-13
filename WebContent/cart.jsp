@@ -20,17 +20,17 @@
    #shopping table td{border-top: 1px solid yellow}
 </style>
  -->
-<title>Insert title here</title>
+<title>购物车</title>
 </head>
-<body>
+<body background="image/background.jpg">
 
    <!-- 显示购物车情况 -->
    
    <!--商品名称：
    &nbsp;&nbsp;商品数量：  -->
-   <h1>我的购物车</h1>
+   <h1 style="color: white;">我的购物车</h1>
    <hr>
-   <a href="index.jsp"><big>首页</big></a><big>>>商品列表</big>
+   <a href="index.jsp" ><big>首页</big></a><span style="color: white;"><big>>>商品列表</big></span>
    
    <div id="shopping">
       <center>
