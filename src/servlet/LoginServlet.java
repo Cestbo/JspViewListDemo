@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
 import dao.UsersDao;
 import entity.Users;
 
@@ -41,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action");
 		if (action.equals("login")) {
-			
+
 			UsersDao dao = new UsersDao();
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
@@ -49,38 +47,41 @@ public class LoginServlet extends HttpServlet {
 			Users user = dao.getUserByName(username);
 			if (user != null && password.equals(user.getPassword())) {
 				request.getSession().setAttribute("user", user);
-				//使用cookies保存用户名和密码
+				// 使用cookies保存用户名和密码
 				saveUserCookies(request, response);
-				request.getRequestDispatcher("index.jsp")
-				.forward(request, response);
-			}
-			else
-			{
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			} else {
 				request.setAttribute("prompt", "用户名或密码错误");
-				request.getRequestDispatcher("login.jsp").
-				forward(request, response);
+				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
 		}
-		
-		if(action.equals("logout"))
-		{
+
+		if (action.equals("logout")) {
 			request.getSession().removeAttribute("user");
 			response.sendRedirect("index.jsp");
 		}
-		
-		if(action.equals("register"))
-		{
-			UsersDao dao1=new UsersDao();
+
+		if (action.equals("register")) {
+			UsersDao dao1 = new UsersDao();
 			String username1 = request.getParameter("username");
-			String password1 = request.getParameter("password");
-			String surepwd=request.getParameter("surepwd");
-			String email=request.getParameter("email");
-			java.sql.Timestamp timestamp=new java.sql.Timestamp(System.currentTimeMillis());
-			Users user=new Users(0, username1, password1, email, timestamp);
-			dao1.addUser(user);
-			request.getSession().setAttribute("user", user);
-			request.getRequestDispatcher("index.jsp")
-			.forward(request, response);
+			Users test = dao1.getUserByName(username1);
+			if (test == null) {
+
+				String password1 = request.getParameter("password");
+				String email = request.getParameter("email");
+				java.sql.Timestamp timestamp = new java.sql.Timestamp(System.currentTimeMillis());
+				Users user = new Users(0, username1, password1, email, timestamp);
+				dao1.addUser(user);
+				request.getSession().setAttribute("user", user);
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+			else
+			{
+				request.setAttribute("isSameName", "存在该用户");
+				request.getRequestDispatcher("register.jsp")
+				.forward(request, response);
+			}
+
 		}
 	}
 
@@ -95,42 +96,36 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	private void saveUserCookies(HttpServletRequest request, HttpServletResponse response) {
-		
-		String[] usercookie=request.getParameterValues("iscookie");
-	    if(usercookie!=null && usercookie.length>0)
-	    {
-	    	String name=request.getParameter("username");
-	    	try {
-				name=URLEncoder.encode(name, "utf-8");
+
+		String[] usercookie = request.getParameterValues("iscookie");
+		if (usercookie != null && usercookie.length > 0) {
+			String name = request.getParameter("username");
+			try {
+				name = URLEncoder.encode(name, "utf-8");
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	    	Cookie username=new Cookie("username",name);
-	        Cookie password=new Cookie("password",request.getParameter("password"));
-	        username.setMaxAge(60*60*24);
-	        password.setMaxAge(60*60*24);
-	        
-	        response.addCookie(username);
-	        response.addCookie(password);
-	        
-	    }
-	    else
-	    {
-	    	Cookie[] cookies=request.getCookies();
-	    	if(cookies!=null&&cookies.length>0)
-	    	{
-	    	for(int i=0;i<cookies.length;i++)
-	    	{
-	    		if(cookies[i].getName().equals("username")||cookies[i].getName().equals("password"))
-	    		{
-	    			cookies[i].setMaxAge(0);
-	    			response.addCookie(cookies[i]);
-	    		}
-	    	}
-	    	}
-	    }
-		
+			Cookie username = new Cookie("username", name);
+			Cookie password = new Cookie("password", request.getParameter("password"));
+			username.setMaxAge(60 * 60 * 24);
+			password.setMaxAge(60 * 60 * 24);
+
+			response.addCookie(username);
+			response.addCookie(password);
+
+		} else {
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null && cookies.length > 0) {
+				for (int i = 0; i < cookies.length; i++) {
+					if (cookies[i].getName().equals("username") || cookies[i].getName().equals("password")) {
+						cookies[i].setMaxAge(0);
+						response.addCookie(cookies[i]);
+					}
+				}
+			}
+		}
+
 	}
-	
+
 }
