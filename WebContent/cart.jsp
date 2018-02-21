@@ -1,3 +1,5 @@
+<%@page import="dao.*"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashMap"%>
@@ -37,11 +39,7 @@
          <table 
          
            class=" table table-striped  table-hover" > 
-         <%
-         	if (request.getSession().getAttribute("cart") != null)
-         	{
-         		Cart cart = (Cart) request.getSession().getAttribute("cart");
-         %>
+        
             <tr id="head" >
                <th style="text-align: center;">商品名称</th>
                <th style="text-align: center;">商品单价</th>
@@ -51,13 +49,15 @@
             </tr>
             <!-- 循环部分 -->
             <%
-              
-                  HashMap<Items,Integer> goods=cart.getGoods();
-                  Set<Map.Entry<Items,Integer>> all=goods.entrySet();
-        	      for(Map.Entry<Items, Integer> obj:all)
+                  CartDao dao=new CartDao();
+                  Users User=(Users)request.getSession().getAttribute("user");
+                  ItemsDao itemsDao=new ItemsDao();
+                  ArrayList<Cart> carts=dao.getAllByUserid(User.getUserid());
+                  int total=0;
+        	      for(Cart obj:carts)
         	      {
-        		    Items item=obj.getKey();
-        		    int num=obj.getValue();
+        		    Items item=itemsDao.getItembyNO(obj.getGoodsid());
+        		    int num=obj.getNumber();
             %>
             <tr class="item" >
                <td align="center">
@@ -77,6 +77,7 @@
                </td>
             </tr>
             <%
+               total=total+item.getPrice();
             } 
                
             %>
@@ -84,10 +85,10 @@
                <td></td>
                <td></td>
                <td></td>
-               <td align="center" style="background-color: gray;color: red;font-size: large;"><strong>总价：￥<%=cart.getTotalPrice() %>元</strong></td>
+               <td align="center" style="background-color: gray;color: red;font-size: large;"><strong>总价：￥<%=total %>元</strong></td>
                <td></td>
             </tr>
-            <%} %>
+            
             <!-- 循环部分 -->
          </table>
       </center>

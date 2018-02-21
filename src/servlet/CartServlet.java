@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CartDao;
 import dao.ItemsDao;
 import entity.Cart;
 import entity.Items;
+import entity.Users;
 
 /**
  * Servlet implementation class CartServlet
@@ -48,15 +50,8 @@ public class CartServlet extends HttpServlet {
 		if(action.equals("delete"))
 		{
 			String no=request.getParameter("no");
-			if(request.getSession().getAttribute("cart")==null)
-			{
-				Cart cart=new Cart();
-				
-				request.getSession().setAttribute("cart", cart);
-			}
-			
-			Cart cart=(Cart)request.getSession().getAttribute("cart");
-			cart.removeGoods(dao.getItembyNO(Integer.parseInt(no)));
+			CartDao dao=new CartDao();
+			dao.delByGoodsid(Integer.parseInt(no));
 			response.sendRedirect(request.getHeader("Referer"));
 		}
 	}
@@ -75,16 +70,15 @@ public class CartServlet extends HttpServlet {
 		String no=request.getParameter("no");
 		String num=request.getParameter("number");
 		Items item=dao.getItembyNO(Integer.parseInt(no));
+		CartDao cartDao=new CartDao();
+		Cart cart=new Cart();
+		Users user=(Users)request.getSession().getAttribute("user");
+	    cart.setUserid(user.getUserid());
+	    cart.setGoodsid(item.getNo());
+	    cart.setStatus(0);
+	    cart.setNumber(Integer.parseInt(num));
+	    cartDao.addGoods(cart);
 		
-		if(request.getSession().getAttribute("cart")==null)
-		{
-			Cart cart=new Cart();
-			
-			request.getSession().setAttribute("cart", cart);
-		}
-		
-		Cart cart=(Cart)request.getSession().getAttribute("cart");
-		cart.addGoods(item, Integer.parseInt(num));
 		
 	}
 	
