@@ -15,12 +15,22 @@
    
 %>
 <script type="text/javascript">
+
 function info(prompt)
 		{
 	
 		   
 	       if(prompt!='null')
 	         alert(prompt);  
+		}
+		
+function refresh() {
+//后面必须加一个随机的参数，否则验证码将不会刷新
+	
+   imgValidate.src="validate.jsp?"+Math.random();	
+}
+//改变鼠标型形状
+
 </script>
 </head>
 <body onload="info('<%=prompt %>')" background="image/background.jpg" >
@@ -49,7 +59,7 @@ function info(prompt)
 %>
 <center>
 <div   style="border: 1px solid white;
-width: 400px;height: 200px;padding: 10px;background-color: white;">
+width: 400px;height: 250px;padding: 10px;background-color: white;">
 <form name="regForm"  action="<%=request.getContextPath()%>/LoginServlet?action=login"  method="post" >
 <table  cellspacing="0" cellpadding="0" style="border-spacing: 10px;border-collapse: separate;">
  <tr>
@@ -60,7 +70,23 @@ width: 400px;height: 200px;padding: 10px;background-color: white;">
     <th>密&nbsp;&nbsp;&nbsp;&nbsp;码</th>
     <td><input class="form-control input-sm" type="password" name="password" value="<%=password%>"/></td>
 </tr>
-
+<tr>
+     <th>验证码</th>
+     <td>
+     <input class="form-control input-sm" type="text" name="code">
+    
+     
+     </td>
+</tr>
+<!-- 验证码 -->
+<tr>
+  <td></td>
+  <td colspan="1" >
+  <img name="imgValidate" src="validate.jsp" 
+  style="cursor: pointer;"
+  onclick="refresh()" >
+  </td>
+</tr>
 <tr>
        <td><input type="checkbox" name="iscookie" />记住账号和密码</td>
    

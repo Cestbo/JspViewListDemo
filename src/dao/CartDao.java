@@ -13,6 +13,13 @@ public class CartDao {
 
 	public boolean addGoods(Cart cart) {
 
+		ArrayList<Cart> carts = getAllByUserid(cart.getUserid());
+		for (Cart c : carts) {
+			if (c.getGoodsid() == cart.getGoodsid()) {
+				updateNum(cart);
+				return true;
+			}
+		}
 		String sql = "insert into cart(userid,goodsid,status,number) values(?,?,?,?)";
 		Connection connection = null;
 
@@ -23,7 +30,6 @@ public class CartDao {
 
 			statement = connection.prepareStatement(sql);
 
-			
 			statement.setInt(1, cart.getUserid());
 			statement.setInt(2, cart.getGoodsid());
 			statement.setInt(3, cart.getStatus());
@@ -103,9 +109,9 @@ public class CartDao {
 		return null;
 	}
 
-	public boolean delByGoodsid(int goodsid) {
+	public boolean delByCartid(int goodsid) {
 
-		String sql = "delete from cart where goodsid=" + goodsid;
+		String sql = "delete from cart where cartid=" + goodsid;
 		PreparedStatement statement = null;
 		Connection connection = null;
 
@@ -131,15 +137,78 @@ public class CartDao {
 		return true;
 	}
 
+	public void updateNum(Cart cart) {
+
+		int priNum=getnumBygoodsidAnduserid(cart.getGoodsid(), cart.getUserid());
+		int total=priNum+cart.getNumber();
+		String sql = "update cart set number=" + total + " where userid=" + cart.getUserid() + " and goodsid="
+				+ cart.getGoodsid();
+		Connection connection = null;
+
+		PreparedStatement statement = null;
+
+		connection = DBhelp.getConnecton();
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}
+
+	}
+	
+	public int getnumBygoodsidAnduserid(int goodsid,int userid) {
+		
+		int num=0;
+		String sql="select number from cart where goodsid=? and userid=?";
+		PreparedStatement statement=null;
+		Connection connection=DBhelp.getConnecton();
+		
+		try {
+			statement=connection.prepareStatement(sql);
+			statement.setInt(1, goodsid);
+			statement.setInt(2, userid);
+			ResultSet resultSet=statement.executeQuery();
+			while(resultSet.next())
+			{
+				num=resultSet.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return num;
+		
+	}
+
 	public static void main(String[] args) {
 
 		CartDao dao = new CartDao();
+
 		
-			
-			
-			dao.delByGoodsid(6);
-		
+
 		System.out.println("ok");
-	   
+
 	}
 }

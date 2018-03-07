@@ -43,15 +43,19 @@ public class LoginServlet extends HttpServlet {
 			UsersDao dao = new UsersDao();
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
+			String code=request.getParameter("code");
+			String validate=(String)request.getSession().getAttribute("ranStr");
 
 			Users user = dao.getUserByName(username);
-			if (user != null && password.equals(user.getPassword())) {
+			if (user != null && password.equals(user.getPassword()) 
+					&& validate.equals(code)) 
+			{
 				request.getSession().setAttribute("user", user);
 				// 使用cookies保存用户名和密码
 				saveUserCookies(request, response);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			} else {
-				request.setAttribute("prompt", "用户名或密码错误");
+				request.setAttribute("prompt", "输入存在错误");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
 		}

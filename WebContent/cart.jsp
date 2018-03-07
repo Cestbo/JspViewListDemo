@@ -72,12 +72,12 @@
                <td align="center"><br><br><%=num %></td>
                <td align="center">
                <br><br>
-                  <a href="<%=request.getContextPath()%>/CartServlet?action=delete&no=<%=item.getNo() %>"
+                  <a href="<%=request.getContextPath()%>/CartServlet?action=delete&no=<%=item.getNo() %>&cartid=<%=obj.getCartid() %>"
                   onclick="delcfm()"><span style="background-color: gray;color: blue;">删除</span></a>
                </td>
             </tr>
             <%
-               total=total+item.getPrice();
+               total=total+item.getPrice()*num;
             } 
                
             %>

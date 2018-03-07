@@ -49,9 +49,9 @@ public class CartServlet extends HttpServlet {
 		
 		if(action.equals("delete"))
 		{
-			String no=request.getParameter("no");
+			String no=request.getParameter("cartid");
 			CartDao dao=new CartDao();
-			dao.delByGoodsid(Integer.parseInt(no));
+			dao.delByCartid(Integer.parseInt(no));
 			response.sendRedirect(request.getHeader("Referer"));
 		}
 	}
