@@ -5,8 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户注册</title>
+<script type="text/javascript" src="jquery.js"></script>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <script type="text/javascript">
+//用ajax实现异步处理，实时提示输入信息
+
+
 window.onload=function() {
 	if("<%=(String)request.getAttribute("isSameName")%>"!="null")
 		alert("<%=(String)request.getAttribute("isSameName")%>");
@@ -59,20 +63,35 @@ width: 400px;height: 300px;padding: 10px;background-color: white;">
  </tr>
  <tr>
     <th>用&nbsp;&nbsp;户&nbsp;&nbsp;名</th>
-    <td><input class="form-control input-sm"  type="text" name="username" id="name"/></td>
+    <td>
+    
+    <input class="form-control input-sm" 
+    
+     type="text" name="username" id="name"/>
+    <span id="n" style="color: red"></span>
+    </td>
  </tr>
  <tr>
     <th>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</th>
-    <td><input class="form-control input-sm" type="password" name="password" id="pwd"/></td>
+    <td>
+    <input class="form-control input-sm" type="password" name="password" id="pwd"/>
+    <span id ="p" style="color: red"></span>
+    </td>
  </tr>
 
  <tr>
     <th>确认密码</th>
-    <td><input class="form-control input-sm"  type="password" name="surepwd" id="surepwd"/></td>
+    <td>
+    <input class="form-control input-sm"  type="password" name="surepwd" id="surepwd"/>
+    <span id="s" style="color: red"></span>
+    </td>
  </tr>
  <tr>
     <th>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</th>
-    <td><input class="form-control input-sm"  type="text" name="email" id="email"/></td>
+    <td>
+    <input class="form-control input-sm"  type="text" name="email" id="email"/>
+    <span id="e" style="color: red"></span>
+    </td>
  </tr>
  <tr>
     <td></td>

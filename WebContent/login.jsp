@@ -16,6 +16,8 @@
 %>
 <script type="text/javascript">
 
+
+
 function info(prompt)
 		{
 	
@@ -31,6 +33,8 @@ function refresh() {
 }
 //改变鼠标型形状
 
+
+	
 </script>
 </head>
 <body onload="info('<%=prompt %>')" background="image/background.jpg" >
@@ -60,20 +64,20 @@ function refresh() {
 <center>
 <div   style="border: 1px solid white;
 width: 400px;height: 250px;padding: 10px;background-color: white;">
-<form name="regForm"  action="<%=request.getContextPath()%>/LoginServlet?action=login"  method="post" >
+<form name="regForm"    method="post" action="<%=request.getContextPath()%>/LoginServlet?action=login">
 <table  cellspacing="0" cellpadding="0" style="border-spacing: 10px;border-collapse: separate;">
  <tr>
     <th>用户名</th>
-    <td><input class="form-control input-sm"  type="text" name="username" value="<%=username%>"/></td>
+    <td><input id="n" class="form-control input-sm"  type="text" name="username" value="<%=username%>"/></td>
  </tr>
  <tr>
     <th>密&nbsp;&nbsp;&nbsp;&nbsp;码</th>
-    <td><input class="form-control input-sm" type="password" name="password" value="<%=password%>"/></td>
+    <td><input id="p" class="form-control input-sm" type="password" name="password" value="<%=password%>"/></td>
 </tr>
 <tr>
      <th>验证码</th>
      <td>
-     <input class="form-control input-sm" type="text" name="code">
+     <input id="c" class="form-control input-sm" type="text" name="code">
     
      
      </td>
@@ -92,8 +96,8 @@ width: 400px;height: 250px;padding: 10px;background-color: white;">
    
 </tr>
 <tr>
-   <td colspan="1"><input class="btn btn-default btn-sm" type="submit"  value="提交"/></td>
-   <td colsapn="1"><input class="btn btn-default btn-sm" type="reset" value="重置"></td>
+   <td colspan="1"><input class="btn btn-default btn-sm" type="submit"  value="提交" /></td>
+   <td colspan="1"><input class="btn btn-default btn-sm" type="reset" value="重置"></td>
 </tr>
 </table>
 

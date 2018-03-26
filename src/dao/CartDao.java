@@ -204,7 +204,7 @@ public class CartDao {
 
 	public static void main(String[] args) {
 
-		CartDao dao = new CartDao();
+		
 
 		
 

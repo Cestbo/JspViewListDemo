@@ -55,8 +55,9 @@ public class LoginServlet extends HttpServlet {
 				saveUserCookies(request, response);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			} else {
-				request.setAttribute("prompt", "输入存在错误");
-				request.getRequestDispatcher("login.jsp").forward(request, response);
+				  request.setAttribute("prompt", "输入存在错误");
+				  request.getRequestDispatcher("login.jsp").forward(request, response);
+				//response.getWriter().write("error");
 			}
 		}
 
