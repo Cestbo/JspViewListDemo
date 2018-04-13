@@ -34,7 +34,7 @@ function check() {
 	   
 	     return false;
 	   }
-   var rege=/[\u4E00-\u9FA5\w]+@\w+.\w+/;
+   var rege=/^[\u4E00-\u9FA5\w]+@\w+.\w+$/;
    if(!rege.test(email))
 	   {
 	     alert("邮箱格式不对");
