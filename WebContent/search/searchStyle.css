@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+#searchText{
+	width: 400px;
+	height: 26px;
+	vertical-align: middle
+}
+#searchButton{
+	vertical-align: middle;
+}
+#searchTip{
+	width:400px;
+	height:200px;
+	margin-top: 0px;
+	margin-right:58px;
+	background-color: white;
+	display:none;
+	color:black;
+}

@@ -8,12 +8,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>淘淘网首页</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/searchControl.js"></script>
+<link rel="stylesheet" type="text/css" href="search/searchStyle.css">
 </head>
 <body background="image/background.jpg" style="color: white;">
 <%
     Users user=(Users)request.getSession().getAttribute("user");
 %>
     <h1>商品展示</h1>
+    <center>
+    <input type="text" id="searchText" onkeyup="search()">
+    <img id="searchButton" src="image/search.png" height="30" width="50" >
+    <div id="searchTip">
+        
+    </div>
+    </center>
     <%
         if(user==null)
         {
@@ -58,7 +68,7 @@
                        <a href="details.jsp?id=<%=item.getNo()%>"><img src="image/<%=item.getPicture()%>" width="120" height="120"></a>
                    </dt>
                    <dd class="dd_name"><%=item.getName() %></dd>
-                   <dt class="dd_city">產地：<%=item.getCity() %><br>價格：￥<%=item.getPrice() %></dt>
+                   <dt class="dd_city">产地：<%=item.getCity() %><br>价格：￥<%=item.getPrice() %></dt>
                 </dl>
              </div>
             </td>
