@@ -98,7 +98,7 @@ function addtoCart(no) {
                        <img src="image/<%=item.getPicture()%>" width="240" height="240">
                    </dt>
                    <dd class="dd_name" style="color: blue;"><%=item.getName() %></dd>
-                   <dd class="dd_city">產地：<%=item.getCity() %>&nbsp;&nbsp;價格：￥<%=item.getPrice() %></dd>
+                   <dd class="dd_city">产地：<%=item.getCity() %>&nbsp;&nbsp;价格：￥<%=item.getPrice() %></dd>
                    <dd>库存量：<span id="store"><%=item.getNumber() %></span></dd>
                    
                 </dl>

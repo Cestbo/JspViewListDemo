@@ -109,7 +109,7 @@ public class ItemsDao {
 	public static void main(String[] args) {
 
 		ItemsDao dao = new ItemsDao();
-		ArrayList<Items> a = dao.getByKeyword("笔");
+		ArrayList<Items> a = dao.getByKeyword("");
 		for(Items i:a)
 		{
 			System.out.println(i.getName());
@@ -172,8 +172,13 @@ public class ItemsDao {
     
 	//模糊查询
 	public ArrayList<Items> getByKeyword(String keyword) {
-		Connection connection = null;
+		
 		ArrayList<Items> items = new ArrayList<Items>();
+		if(keyword.equals(""))
+		{
+			return items;
+		}
+		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		connection = DBhelp.getConnecton();

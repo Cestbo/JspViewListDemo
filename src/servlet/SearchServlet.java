@@ -45,7 +45,7 @@ public class SearchServlet extends HttpServlet {
 		for (Items i:items)
 		{
 			String name=i.getName();
-			result=name+",";
+			result=name+","+result;
 		}
 		out.write(result);
 	}

@@ -9,10 +9,10 @@
 }
 #searchTip{
 	width:400px;
-	height:200px;
 	margin-top: 0px;
 	margin-right:58px;
 	background-color: white;
 	display:none;
 	color:black;
+	text-align: left;
 }
