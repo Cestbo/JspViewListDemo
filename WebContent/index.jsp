@@ -43,7 +43,7 @@
     <hr>
     
     <center>
-    <table width="750" height="120" cellpadding="0" cellspacing="0" border="0" >
+    <table width="750" height="120" cellpadding="0" cellspacing="80" border="0" >
       <% 
         ItemsDao dao=new ItemsDao();
         ArrayList<Items> list=dao.getAllitems();
